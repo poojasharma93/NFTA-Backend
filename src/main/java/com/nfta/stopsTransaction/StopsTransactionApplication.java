@@ -7,6 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.nfta.stopsTransaction.service.AdminService;
 import com.nfta.stopsTransaction.service.RouteService;
@@ -46,5 +47,7 @@ public class StopsTransactionApplication {
 	{
 		return new ServiceRequestServiceImpl();
 	}
+	
+
 
 }

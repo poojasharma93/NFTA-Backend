@@ -41,9 +41,9 @@ public class AdminUser {
 	@JsonIgnoreProperties("createDateTime")
     private LocalDateTime createDateTime;
  
-    @UpdateTimestamp
-	@JsonIgnoreProperties("updateDateTime")
-    private LocalDateTime updateDateTime;
+//    @UpdateTimestamp
+//	@JsonIgnoreProperties("updateDateTime")
+//    private LocalDateTime updateDateTime;
 	
 	public int getUser_id() {
 		return user_id;
@@ -84,15 +84,15 @@ public class AdminUser {
 	public void setCreateDateTime(LocalDateTime createDateTime) {
 		this.createDateTime = createDateTime;
 	}
-
-	public LocalDateTime getUpdateDateTime() {
-		return updateDateTime;
-	}
-
-	public void setUpdateDateTime(LocalDateTime updateDateTime) {
-		this.updateDateTime = updateDateTime;
-	}
-	
+//
+//	public LocalDateTime getUpdateDateTime() {
+//		return updateDateTime;
+//	}
+//
+//	public void setUpdateDateTime(LocalDateTime updateDateTime) {
+//		this.updateDateTime = updateDateTime;
+//	}
+//	
 
 	
 }

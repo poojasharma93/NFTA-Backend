@@ -1,6 +1,7 @@
 package com.nfta.stopsTransaction.model;
 
 import java.io.Serializable;
+import java.sql.Blob;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,6 +25,7 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -75,6 +77,31 @@ public class StopTransactions implements Serializable {
 	@Column(nullable = false)
 	private Boolean system_map;
 	private String transaction_type;
+	
+
+
+	private String filepath_image1;
+	
+	public String getFilepath() {
+		return filepath_image1;
+	}
+
+	public void setFilepath(String filepath) {
+		this.filepath_image1 = filepath;
+	}
+
+	@Lob
+	private byte[] image1_Blob;
+
+
+
+	public byte[] getImage1_Blob() {
+		return image1_Blob;
+	}
+
+	public void setImage1_Blob(byte[] bytes) {
+		this.image1_Blob = bytes;
+	}
 
 	@ManyToMany
 	@JoinTable(name = "route_transaction", joinColumns = @JoinColumn(name = "transaction_no"), inverseJoinColumns = @JoinColumn(name = "route_id"))

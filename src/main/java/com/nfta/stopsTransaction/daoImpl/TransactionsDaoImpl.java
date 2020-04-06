@@ -1,5 +1,7 @@
 package com.nfta.stopsTransaction.daoImpl;
 
+import java.io.IOException;
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -16,8 +18,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import org.hibernate.Hibernate;
+import org.hibernate.Session;
+import org.hibernate.engine.spi.SessionImplementor;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.nfta.stopsTransaction.dao.TransactionsDao;
 import com.nfta.stopsTransaction.model.SearchFilters;
@@ -30,6 +36,8 @@ public class TransactionsDaoImpl implements TransactionsDao{
 
 	@PersistenceContext
 	private EntityManager em;
+	
+//	final SessionImplementor session = em.unwrap(SessionImplementor.class);
 
 	// SQL injection
 
@@ -99,6 +107,8 @@ public class TransactionsDaoImpl implements TransactionsDao{
 	@Override
 	public String addOrUpdate(StopTransactions stopTransaction) {
 		// TODO Auto-generated method stub
+		
+	
 		try
 		{
 			em.persist(stopTransaction);

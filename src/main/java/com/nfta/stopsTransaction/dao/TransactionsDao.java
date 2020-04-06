@@ -3,6 +3,7 @@ package com.nfta.stopsTransaction.dao;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.nfta.stopsTransaction.model.SearchFilters;
 import com.nfta.stopsTransaction.model.StopTransactions;

@@ -1,17 +1,26 @@
 package com.nfta.stopsTransaction.controller;
 
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.http.MediaType;
+import org.hibernate.Hibernate;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
+import com.mysql.cj.xdevapi.SessionFactory;
 import com.nfta.stopsTransaction.model.AdminUser;
 import com.nfta.stopsTransaction.model.SearchFilters;
 import com.nfta.stopsTransaction.model.StopTransactions;
@@ -86,8 +95,11 @@ public class TransactionController {
 	 * @param stopTransaction
 	 * @return
 	 */
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
+
+	@RequestMapping(value = "/add", method = RequestMethod.POST )
 	public @ResponseBody String addTransaction(@RequestBody StopTransactions stopTransaction) {
+		
+		
 		String s="";
 		try {
 			s=service.addOrUpdate(stopTransaction);
@@ -98,8 +110,10 @@ public class TransactionController {
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public @ResponseBody String updateTransaction(@RequestBody StopTransactions stopTransaction) {
+	public @ResponseBody String updateTransaction(@RequestBody StopTransactions stopTransaction,
+			@RequestParam(value = "file", required = false) MultipartFile file) {
 
+		
 		String s="";
 		try {
 			s=service.addOrUpdate(stopTransaction);
@@ -112,6 +126,8 @@ public class TransactionController {
 	@RequestMapping(value = "/updateTransaction", method = RequestMethod.POST)
 	public @ResponseBody String updateInformation(@RequestBody StopTransactions stopTransaction) {
 
+		
+		
 		String s="";
 		try {
 			s=service.updateStopsInformation(stopTransaction);
@@ -120,6 +136,23 @@ public class TransactionController {
 		}
 		return s;
 	}
+//	
+//	@RequestMapping(value = "/upload/{transaction_no}", method = RequestMethod.POST,consumes = MediaType.MULTIPART_FORM_DATA_VALUE )
+//	public @ResponseBody String uploadTransaction(@PathVariable(value = "transaction_no",required = true) Long transaction_no,
+//			@RequestParam(value="file")MultipartFile file) {
+//		
+//		List<StopTransactions> list = new ArrayList<>();
+//		String s="";
+//		try {
+//			searchFilters.setSearchFilter(transaction_no, null, null, null, null, null, null, null, null, null);
+//			list=service.getTransactions(searchFilters);
+//			Byte[] imageBytes=
+//			s=service.addOrUpdate(stopTransaction);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return s;
+//	}
 
 	
 }
