@@ -2,6 +2,7 @@ package com.nfta.stopsTransaction.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -9,15 +10,21 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import antlr.collections.List;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import java.util.List;
 import lombok.Data;
 
 @Entity
@@ -29,24 +36,71 @@ public class ServiceRequest implements Serializable{
 	 */
 	private static final long serialVersionUID = -5135881928483223568L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Integer request_id;
-	private Integer admin_user_id;
+	
+	
+	
 	private String requested_user;
 	private String location;
-	private String direction;
-	private String route;
+	@JsonInclude()
+	@Transient
+	private Dropdowns direction;
+	@JsonInclude()
+	@Transient
+	private List<Dropdowns> route;
 	private String reason;
-	private Integer stopId;
+	private String stop_id;
 	private String additional_information;
 	private String status;
 	private String request_type;
-//	@CreationTimestamp
-//    private LocalDateTime createDateTime;
-//	
-// 
-////    @UpdateTimestamp
-////    private LocalDateTime updateDateTime;
+
+	
+	private String image0;
+	private String image1;
+	private String image2;
+
+	@ManyToMany
+	@JoinTable(name = "dropdown_serviceRequest", joinColumns = @JoinColumn(name = "request_id"), inverseJoinColumns = @JoinColumn(name = "dropdown_id"))
+	private List<Dropdowns> dropdowns = new ArrayList<>();
+	
+	
+	public List<Dropdowns> getDropdowns() {
+		return dropdowns;
+	}
+
+	public void setDropdowns(List<Dropdowns> dropdowns) {
+		this.dropdowns = dropdowns;
+	}
+
+	public String getImage0() {
+		return image0;
+	}
+
+	public void setImage0(String image0) {
+		this.image0 = image0;
+	}
+
+	public String getImage1() {
+		return image1;
+	}
+
+	public void setImage1(String image1) {
+		this.image1 = image1;
+	}
+
+	public String getImage2() {
+		return image2;
+	}
+
+	public void setImage2(String image2) {
+		this.image2 = image2;
+	}
+// 	@CreationTimestamp
+//     private LocalDateTime createDateTime;
+ 
+//     @UpdateTimestamp
+//     private LocalDateTime updateDateTime;
 	
 	public Integer getRequest_id() {
 		return request_id;
@@ -55,12 +109,7 @@ public class ServiceRequest implements Serializable{
 		this.request_id = request_id;
 	}
 
-	public Integer getAdmin_user_id() {
-		return admin_user_id;
-	}
-	public void setAdmin_user_id(Integer admin_user_id) {
-		this.admin_user_id = admin_user_id;
-	}
+	
 	public String getRequested_user() {
 		return requested_user;
 	}
@@ -73,16 +122,16 @@ public class ServiceRequest implements Serializable{
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	public String getDirection() {
+	public Dropdowns getDirection() {
 		return direction;
 	}
-	public void setDirection(String direction) {
+	public void setDirection(Dropdowns direction) {
 		this.direction = direction;
 	}
-	public String getRoute() {
+	public List<Dropdowns> getRoute() {
 		return route;
 	}
-	public void setRoute(String route) {
+	public void setRoute(List<Dropdowns> route) {
 		this.route = route;
 	}
 	public String getReason() {
@@ -91,11 +140,12 @@ public class ServiceRequest implements Serializable{
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
-	public Integer getStopId() {
-		return stopId;
+	
+	public String getStop_id() {
+		return stop_id;
 	}
-	public void setStopId(Integer stopId) {
-		this.stopId = stopId;
+	public void setStop_id(String stop_id) {
+		this.stop_id = stop_id;
 	}
 	public String getAdditional_information() {
 		return additional_information;
@@ -116,20 +166,23 @@ public class ServiceRequest implements Serializable{
 		this.request_type = request_type;
 	}
 	
-//	public LocalDateTime getCreateDateTime() {
-//		return createDateTime;
-//	}
-//
-//	public void setCreateDateTime(LocalDateTime createDateTime) {
-//		this.createDateTime = createDateTime;
-//	}
-//
-//	public LocalDateTime getUpdateDateTime() {
-//		return updateDateTime;
-//	}
-//
-//	public void setUpdateDateTime(LocalDateTime updateDateTime) {
-//		this.updateDateTime = updateDateTime;
-//	}
+
+	
+	
+// 	public LocalDateTime getCreateDateTime() {
+// 		return createDateTime;
+// 	}
+
+// 	public void setCreateDateTime(LocalDateTime createDateTime) {
+// 		this.createDateTime = createDateTime;
+// 	}
+
+// 	public LocalDateTime getUpdateDateTime() {
+// 		return updateDateTime;
+// 	}
+
+// 	public void setUpdateDateTime(LocalDateTime updateDateTime) {
+// 		this.updateDateTime = updateDateTime;
+// 	}
 	
 }
