@@ -41,6 +41,7 @@ public class DropdownController {
 	@RequestMapping(value = "/addDropdown", method = RequestMethod.POST)
 	public @ResponseBody void addDropdown(@RequestBody Dropdowns dropdown) throws Exception {
 		String s="";
+		
 		try {
 			s=dropdownService.addDropdown(dropdown);
 		}catch(DataIntegrityViolationException e) {
@@ -56,6 +57,7 @@ public class DropdownController {
 	@RequestMapping(value = "/deleteDropdown", method = RequestMethod.POST)
 	public @ResponseBody String deleteDropdown(@RequestBody Dropdowns dropdown) {
 		String s="";
+		dropdown.setUniqueVariable(dropdown.getDropdown_id());
 		try {
 			s=dropdownService.deleteDropdown(dropdown);
 		} catch (Exception e) {

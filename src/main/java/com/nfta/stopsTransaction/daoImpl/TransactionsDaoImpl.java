@@ -129,6 +129,7 @@ public class TransactionsDaoImpl implements TransactionsDao{
 	
 		t.setStatus(stopTransaction.getStatus());
 		t.setStop_id(stopTransaction.getStop_id());
+		t.setUser(stopTransaction.getUsername());
 		t.setAdmin_comments(stopTransaction.getAdmin_comments());
 		t.setAdditional_information(stopTransaction.getAdditional_information());
 		return "";
